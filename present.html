@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Sayang! 💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fdf2f8; /* Pastel pink */
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title-font {
+            font-family: 'Pacifico', cursive;
+        }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 1.5rem;
+            animation: floatUp linear forwards;
+            z-index: 0;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-110vh) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Polaroid Style for Gallery */
+        .polaroid {
+            background: white;
+            padding: 12px 12px 40px 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .polaroid:nth-child(odd) {
+            transform: rotate(-3deg);
+        }
+        
+        .polaroid:nth-child(even) {
+            transform: rotate(4deg);
+        }
+
+        .polaroid:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 20;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Runaway Button Container */
+        #game-container {
+            position: relative;
+            min-height: 250px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #no-btn {
+            position: absolute;
+            transition: top 0.2s ease, left 0.2s ease;
+        }
+
+        /* Modal styling */
+        #success-modal {
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Animations for new screens */
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        .wiggle-anim {
+            animation: wiggle 1s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen pb-20">
+
+    <!-- Gift Screen (Coquette Theme) -->
+    <div id="gift-screen" class="fixed inset-0 bg-[#fff0f5] z-[100] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div id="gift-box" class="cursor-pointer transform transition-transform duration-300 hover:scale-110 flex flex-col items-center wiggle-anim">
+            <div class="text-[150px] drop-shadow-2xl">🎁</div>
+            <p class="mt-6 text-pink-500 font-bold title-font text-3xl bg-white/90 px-8 py-3 rounded-full border-2 border-pink-200 shadow-md text-center">
+                Ada kado nih buat kamu 🎀
+            </p>
+        </div>
+    </div>
+
+    <!-- Countdown Screen -->
+    <div id="countdown-screen" class="fixed inset-0 bg-[#fff0f5] z-[90] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-1000">
+        <h1 id="countdown-text" class="title-font text-7xl md:text-9xl text-pink-500 text-center transition-all duration-500 transform scale-50 opacity-0 drop-shadow-lg px-4 leading-tight">
+            3
+        </h1>
+    </div>
+
+    <!-- Container for main content, elevated above floating hearts -->
+    <main id="main-content" class="relative z-10 container mx-auto px-4 pt-12 pb-24 max-w-3xl hidden opacity-0 transition-opacity duration-1000 delay-300">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-12 animate-fade-in-up">
+            <h1 class="title-font text-5xl md:text-6xl text-pink-500 mb-4 drop-shadow-md">Happy 20th Birthday!</h1>
+            <p class="text-xl text-pink-700 font-semibold mb-2">Untuk Kesayanganku 💖</p>
+            <div class="bg-white/60 rounded-full py-2 px-4 inline-block shadow-sm text-pink-600 text-sm font-bold tracking-wide">
+                📍 SURABAYA ✈️ CILEUNGSI
+            </div>
+        </header>
+
+        <!-- Sweet Message Card -->
+        <section class="bg-white rounded-3xl shadow-xl p-8 mb-12 border-4 border-pink-100 relative">
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 text-5xl">
+                🎂
+            </div>
+            <h2 class="title-font text-3xl text-center text-pink-400 mb-6 mt-4">Cieee Nambah Umur!</h2>
+            <p class="text-gray-700 leading-relaxed text-center mb-4">
+                Selamat ulang tahun yang ke-20 ya, sayang! Semoga di umur yang baru ini kamu makin dewasa, makin sukses, dilancarkan semua urusannya, dan yang terpenting... makin sayang sama aku! Hehehe.
+            </p>
+            <p class="text-gray-700 leading-relaxed text-center mb-4">
+                Meskipun sekarang kita lagi LDR-an, terpisah jarak antara <b>Surabaya</b> dan <b>Cileungsi</b>, tapi ketahuilah kalau jarak itu cuma angka. Rasa sayang aku ke kamu nggak akan pernah berkurang sedikitpun. Doain ya semoga kita bisa cepet-cepet ketemu dan rayain bareng-bareng!
+            </p>
+            <p class="text-pink-500 font-bold text-center text-lg mt-6 title-font">
+                I Love You More Than Anything! 💕
+            </p>
+        </section>
+
+        <!-- Photo Gallery -->
+        <section class="mb-16">
+            <h2 class="title-font text-3xl text-center text-pink-500 mb-8">Kenangan Kita ✨</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4">
+                <!-- Foto 1 -->
+                <div class="polaroid">
+                    <img src="fotbar1.jpeg" alt="Kenangan 1" class="w-full h-auto aspect-square object-cover rounded-sm">
+                    <p class="text-center mt-4 title-font text-gray-600 text-sm">Waktu Pertama Kali 🥺</p>
+                </div>
+                <!-- Foto 2 -->
+                <div class="polaroid">
+                    <img src="fotbar2.jpeg" alt="Kenangan 2" class="w-full h-auto aspect-square object-cover rounded-sm">
+                    <p class="text-center mt-4 title-font text-gray-600 text-sm">Lucu banget! 😂</p>
+                </div>
+                <!-- Foto 3 -->
+                <div class="polaroid">
+                    <img src="fotbar3.jpeg" alt="Kenangan 3" class="w-full h-auto aspect-square object-cover rounded-sm">
+                    <p class="text-center mt-4 title-font text-gray-600 text-sm">Kangen masa ini 🥰</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Question Section -->
+        <section class="bg-white rounded-3xl shadow-xl p-8 border-4 border-pink-100 text-center">
+            <h2 class="title-font text-3xl text-pink-500 mb-6">Pertanyaan Penting! 🧐</h2>
+            <p class="text-xl text-gray-700 font-semibold mb-8">Kamu kangen aku nggak sih?</p>
+            
+            <div id="game-container">
+                <!-- YES Button -->
+                <button id="yes-btn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-110 active:scale-95 text-lg absolute left-[15%] md:left-[25%] top-0 z-20">
+                    Kangen Banget! 🥺
+                </button>
+                
+                <!-- NO Button (Runaway) -->
+                <button id="no-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-3 px-8 rounded-full shadow-lg text-lg left-[55%] md:left-[50%] top-0 z-20">
+                    Enggak 😝
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Success Modal (Hidden by default) -->
+    <div id="success-modal" class="fixed inset-0 bg-pink-900/40 z-50 flex items-center justify-center opacity-0 pointer-events-none">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-90 transition-transform duration-300" id="modal-content">
+            <div class="text-center">
+                <div class="text-6xl mb-4">🥰</div>
+                <h3 class="title-font text-3xl text-pink-500 mb-2">Awww!</h3>
+                <p class="text-gray-700 mb-6 text-lg">Aku juga kangen bangetttttt sama kamu! Tunggu aku ke Cileungsi ya sayang! Luv u! ❤️❤️❤️</p>
+                <button id="close-modal" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full w-full transition-colors">
+                    Luv u too!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 0. Gift Box & Countdown Logic ---
+        const giftScreen = document.getElementById('gift-screen');
+        const giftBox = document.getElementById('gift-box');
+        const countdownScreen = document.getElementById('countdown-screen');
+        const countdownText = document.getElementById('countdown-text');
+        const mainContent = document.getElementById('main-content');
+        
+        let heartsInterval;
+
+        giftBox.addEventListener('click', () => {
+            // Sembunyikan layar kado
+            giftScreen.classList.add('opacity-0');
+            setTimeout(() => {
+                giftScreen.classList.add('hidden');
+                // Tampilkan layar countdown
+                countdownScreen.classList.remove('opacity-0', 'pointer-events-none');
+                startCountdown();
+            }, 1000);
+        });
+
+        function startCountdown() {
+            const texts = ["3", "2", "1", "Happy 20th Birthday<br>Nawal! 🥳💖"];
+            let i = 0;
+            
+            function showNext() {
+                if (i < texts.length) {
+                    countdownText.innerHTML = texts[i];
+                    countdownText.classList.remove('scale-50', 'opacity-0');
+                    countdownText.classList.add('scale-100', 'opacity-100');
+                    
+                    setTimeout(() => {
+                        countdownText.classList.remove('scale-100', 'opacity-100');
+                        // Jangan fade out jika ini teks terakhir
+                        if (i < texts.length - 1) {
+                            countdownText.classList.add('scale-50', 'opacity-0');
+                        }
+                        i++;
+                        setTimeout(showNext, 600); // Jeda sebelum teks berikutnya muncul
+                    }, i === texts.length - 1 ? 3000 : 1000); // Teks terakhir tampil lebih lama
+                } else {
+                    // Akhiri countdown, pindah ke halaman utama
+                    countdownScreen.classList.add('opacity-0');
+                    setTimeout(() => {
+                        countdownScreen.classList.add('hidden');
+                        mainContent.classList.remove('hidden');
+                        
+                        // Sedikit delay agar display:block teraplikasi sebelum transisi opacity
+                        setTimeout(() => {
+                            mainContent.classList.remove('opacity-0');
+                            // Mulai hujan hati setelah masuk web utama
+                            heartsInterval = setInterval(createHeart, 400); 
+                        }, 50);
+                    }, 1000);
+                }
+            }
+            // Mulai countdown setelah delay singkat
+            setTimeout(showNext, 500);
+        }
+
+        // --- 1. Floating Hearts Animation Logic ---
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            
+            // Array of cute emojis
+            const emojis = ['💖', '💕', '💗', '💓', '🌸', '✨'];
+            heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            // Random horizontal position (0 to 100vw)
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Random animation duration between 3s and 6s
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            
+            // Random size
+            heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+
+            document.body.appendChild(heart);
+
+            // Remove heart after animation completes to avoid memory leaks
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // (Animasi hearts sekarang dipanggil dari fungsi startCountdown)
+
+        // --- 2. Runaway "No" Button Logic ---
+        const noBtn = document.getElementById('no-btn');
+        const container = document.getElementById('game-container');
+        
+        // Handle both mouse hover (desktop) and touch (mobile)
+        const moveButton = (e) => {
+            e.preventDefault(); // Prevent accidental clicks/focus on mobile
+            
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+            
+            // Calculate max boundaries within the container
+            const maxX = containerRect.width - btnRect.width;
+            const maxY = containerRect.height - btnRect.height;
+            
+            // Generate random coordinates
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            // Apply new coordinates
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        };
+
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', moveButton);
+        
+        // Just in case they manage to click it (keyboard navigation etc)
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveButton(e);
+        });
+
+
+        // --- 3. Modal / Success Logic ---
+        const yesBtn = document.getElementById('yes-btn');
+        const modal = document.getElementById('success-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeBtn = document.getElementById('close-modal');
+
+        yesBtn.addEventListener('click', () => {
+            // Show modal
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('opacity-100');
+            modalContent.classList.remove('scale-90');
+            modalContent.classList.add('scale-100');
+            
+            // Create a burst of hearts instantly
+            for(let i=0; i<20; i++) {
+                setTimeout(createHeart, i * 50);
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            // Hide modal
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-90');
+        });
+    </script>
+</body>
+</html>
